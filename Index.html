@@ -19,7 +19,7 @@
       justify-content: center;
       align-items: center;
       padding: 24px;
-      color: #2f2f2f;
+      color: #2c2c2c;
     }
 
     .container {
@@ -27,187 +27,233 @@
       max-width: 980px;
       background: rgba(255, 255, 255, 0.92);
       border-radius: 28px;
-      padding: 34px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      padding: 32px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    header {
       text-align: center;
+      margin-bottom: 28px;
     }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-size: clamp(2rem, 4vw, 3rem);
       margin-bottom: 10px;
-      color: #2d2d2d;
+      color: #d35400;
     }
 
     .subtitle {
       font-size: 1.05rem;
-      color: #666;
-      margin-bottom: 30px;
+      color: #6b4e3d;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 22px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 20px;
     }
 
     .card {
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 24px 18px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      border: 2px solid #fff0e8;
+      background: #fff;
+      border-radius: 22px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+      border: 2px solid #ffe0c7;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.14);
+      transform: translateY(-5px);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
     }
 
     .emoji {
-      font-size: 4rem;
-      margin-bottom: 10px;
+      font-size: 3.2rem;
+      margin-bottom: 12px;
     }
 
-    .food-name {
+    .card h2 {
       font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      color: #44312a;
     }
 
     .counter {
       font-size: 3rem;
       font-weight: 800;
-      color: #ff7043;
-      margin: 10px 0 18px;
+      color: #e67e22;
+      margin: 8px 0 18px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
     }
 
     button {
       border: none;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 12px 22px;
-      font-size: 1rem;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-size: 1.25rem;
       font-weight: 700;
-      color: white;
-      background: linear-gradient(135deg, #ff7043, #ff3d00);
-      box-shadow: 0 8px 16px rgba(255, 87, 34, 0.28);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(255, 87, 34, 0.38);
+      transform: scale(1.06);
+      opacity: 0.92;
     }
 
-    button:active {
-      transform: scale(0.96);
+    .add {
+      background: #2ecc71;
+      color: #fff;
     }
 
-    .reset-btn {
-      margin-top: 30px;
-      background: linear-gradient(135deg, #37474f, #263238);
-      box-shadow: 0 8px 16px rgba(38, 50, 56, 0.25);
+    .subtract {
+      background: #e74c3c;
+      color: #fff;
+    }
+
+    .footer-actions {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .reset {
+      background: #34495e;
+      color: white;
+      font-size: 1rem;
+      padding: 13px 20px;
     }
 
     .total-box {
-      margin-top: 30px;
-      background: #fff7f2;
+      margin-top: 26px;
+      text-align: center;
+      background: #fff7ef;
       border-radius: 18px;
-      padding: 16px;
+      padding: 18px;
+      border: 2px dashed #f39c12;
       font-size: 1.25rem;
       font-weight: 700;
-      color: #444;
+      color: #8e5100;
     }
 
-    .total-box span {
-      color: #ff3d00;
-      font-size: 1.5rem;
-    }
-
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       .container {
-        padding: 24px 18px;
+        padding: 22px;
       }
 
-      .emoji {
-        font-size: 3.5rem;
+      .buttons {
+        flex-direction: column;
       }
 
-      .counter {
-        font-size: 2.6rem;
+      button {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
   <main class="container">
-    <h1>🍽️ Contador de Comidas</h1>
-    <p class="subtitle">Suma cada maki, hamburguesa, taco o pizza de forma individual.</p>
+    <header>
+      <h1>🍽️ Contador de Comidas</h1>
+      <p class="subtitle">Suma o resta cada pedido individualmente</p>
+    </header>
 
     <section class="cards">
       <div class="card">
         <div class="emoji">🍣</div>
-        <div class="food-name">Makis</div>
+        <h2>Makis</h2>
         <div class="counter" id="makis">0</div>
-        <button onclick="sumar('makis')">+ Sumar</button>
+        <div class="buttons">
+          <button class="subtract" onclick="changeCount('makis', -1)">−</button>
+          <button class="add" onclick="changeCount('makis', 1)">+</button>
+        </div>
       </div>
 
       <div class="card">
         <div class="emoji">🍔</div>
-        <div class="food-name">Hamburguesas</div>
+        <h2>Hamburguesas</h2>
         <div class="counter" id="hamburguesas">0</div>
-        <button onclick="sumar('hamburguesas')">+ Sumar</button>
+        <div class="buttons">
+          <button class="subtract" onclick="changeCount('hamburguesas', -1)">−</button>
+          <button class="add" onclick="changeCount('hamburguesas', 1)">+</button>
+        </div>
       </div>
 
       <div class="card">
         <div class="emoji">🌮</div>
-        <div class="food-name">Tacos</div>
+        <h2>Tacos</h2>
         <div class="counter" id="tacos">0</div>
-        <button onclick="sumar('tacos')">+ Sumar</button>
+        <div class="buttons">
+          <button class="subtract" onclick="changeCount('tacos', -1)">−</button>
+          <button class="add" onclick="changeCount('tacos', 1)">+</button>
+        </div>
       </div>
 
       <div class="card">
         <div class="emoji">🍕</div>
-        <div class="food-name">Pizzas</div>
+        <h2>Pizzas</h2>
         <div class="counter" id="pizzas">0</div>
-        <button onclick="sumar('pizzas')">+ Sumar</button>
+        <div class="buttons">
+          <button class="subtract" onclick="changeCount('pizzas', -1)">−</button>
+          <button class="add" onclick="changeCount('pizzas', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="emoji">🥘</div>
+        <h2>Variado</h2>
+        <div class="counter" id="variado">0</div>
+        <div class="buttons">
+          <button class="subtract" onclick="changeCount('variado', -1)">−</button>
+          <button class="add" onclick="changeCount('variado', 1)">+</button>
+        </div>
       </div>
     </section>
 
     <div class="total-box">
-      Total consumido: <span id="total">0</span>
+      Total general: <span id="total">0</span> pedidos
     </div>
 
-    <button class="reset-btn" onclick="reiniciar()">Reiniciar contadores</button>
+    <div class="footer-actions">
+      <button class="reset" onclick="resetCounters()">🔄 Reiniciar contadores</button>
+    </div>
   </main>
 
   <script>
-    const comidas = {
-      makis: 0,
-      hamburguesas: 0,
-      tacos: 0,
-      pizzas: 0
-    };
+    const items = ['makis', 'hamburguesas', 'tacos', 'pizzas', 'variado'];
 
-    function sumar(comida) {
-      comidas[comida]++;
-      document.getElementById(comida).textContent = comidas[comida];
-      actualizarTotal();
+    function changeCount(id, value) {
+      const element = document.getElementById(id);
+      let current = parseInt(element.textContent, 10);
+      current += value;
+
+      if (current < 0) current = 0;
+
+      element.textContent = current;
+      updateTotal();
     }
 
-    function actualizarTotal() {
-      const total = Object.values(comidas).reduce((acumulado, cantidad) => acumulado + cantidad, 0);
+    function updateTotal() {
+      const total = items.reduce((sum, id) => {
+        return sum + parseInt(document.getElementById(id).textContent, 10);
+      }, 0);
       document.getElementById('total').textContent = total;
     }
 
-    function reiniciar() {
-      for (const comida in comidas) {
-        comidas[comida] = 0;
-        document.getElementById(comida).textContent = 0;
-      }
-      actualizarTotal();
+    function resetCounters() {
+      items.forEach(id => {
+        document.getElementById(id).textContent = 0;
+      });
+      updateTotal();
     }
   </script>
 </body>
