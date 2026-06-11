@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contador de Comidas</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      color: #2f2f2f;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 980px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin-bottom: 10px;
+      color: #2d2d2d;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 22px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px 18px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: 2px solid #fff0e8;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.14);
+    }
+
+    .emoji {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+
+    .food-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .counter {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #ff7043;
+      margin: 10px 0 18px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, #ff7043, #ff3d00);
+      box-shadow: 0 8px 16px rgba(255, 87, 34, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(255, 87, 34, 0.38);
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .reset-btn {
+      margin-top: 30px;
+      background: linear-gradient(135deg, #37474f, #263238);
+      box-shadow: 0 8px 16px rgba(38, 50, 56, 0.25);
+    }
+
+    .total-box {
+      margin-top: 30px;
+      background: #fff7f2;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #444;
+    }
+
+    .total-box span {
+      color: #ff3d00;
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 24px 18px;
+      }
+
+      .emoji {
+        font-size: 3.5rem;
+      }
+
+      .counter {
+        font-size: 2.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>🍽️ Contador de Comidas</h1>
+    <p class="subtitle">Suma cada maki, hamburguesa, taco o pizza de forma individual.</p>
+
+    <section class="cards">
+      <div class="card">
+        <div class="emoji">🍣</div>
+        <div class="food-name">Makis</div>
+        <div class="counter" id="makis">0</div>
+        <button onclick="sumar('makis')">+ Sumar</button>
+      </div>
+
+      <div class="card">
+        <div class="emoji">🍔</div>
+        <div class="food-name">Hamburguesas</div>
+        <div class="counter" id="hamburguesas">0</div>
+        <button onclick="sumar('hamburguesas')">+ Sumar</button>
+      </div>
+
+      <div class="card">
+        <div class="emoji">🌮</div>
+        <div class="food-name">Tacos</div>
+        <div class="counter" id="tacos">0</div>
+        <button onclick="sumar('tacos')">+ Sumar</button>
+      </div>
+
+      <div class="card">
+        <div class="emoji">🍕</div>
+        <div class="food-name">Pizzas</div>
+        <div class="counter" id="pizzas">0</div>
+        <button onclick="sumar('pizzas')">+ Sumar</button>
+      </div>
+    </section>
+
+    <div class="total-box">
+      Total consumido: <span id="total">0</span>
+    </div>
+
+    <button class="reset-btn" onclick="reiniciar()">Reiniciar contadores</button>
+  </main>
+
+  <script>
+    const comidas = {
+      makis: 0,
+      hamburguesas: 0,
+      tacos: 0,
+      pizzas: 0
+    };
+
+    function sumar(comida) {
+      comidas[comida]++;
+      document.getElementById(comida).textContent = comidas[comida];
+      actualizarTotal();
+    }
+
+    function actualizarTotal() {
+      const total = Object.values(comidas).reduce((acumulado, cantidad) => acumulado + cantidad, 0);
+      document.getElementById('total').textContent = total;
+    }
+
+    function reiniciar() {
+      for (const comida in comidas) {
+        comidas[comida] = 0;
+        document.getElementById(comida).textContent = 0;
+      }
+      actualizarTotal();
+    }
+  </script>
+</body>
+</html>
